@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-sky-400">
+    <section id="registration" class="bg-white py-16">
+        <div class="container mx-auto text-center">
+          <h2 class="text-3xl font-bold text-gray-800">Register for the Seminar</h2>
+          <p class="text-gray-600 mt-4">Fill out the form below to reserve your spot at the seminar.</p>
+    
+          <div class="mt-8 max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
+            <form action="index.html" onsubmit="validateForm(event)" method="POST">
+              <div class="mb-4">
+                <label for="name" class="block text-left text-gray-800">Full Name</label>
+                <input type="text" id="name" name="name" class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+              </div>
+    
+              <div class="mb-4">
+                <label for="email" class="block text-left text-gray-800">Email Address</label>
+                <input type="email" id="email" name="email" class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+              </div>
+    
+              <div class="mb-4">
+                <label for="phone" class="block text-left text-gray-800">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+              </div>
+    
+              <div class="mb-4">
+                <label for="topic" class="block text-left text-gray-800">Select Your Preferred Topic</label>
+                <select id="topic" name="topic" class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                  <option value="">Select a topic</option>
+                  <option value="ai">The Future of Artificial Intelligence</option>
+                  <option value="business">Building Resilient Businesses with Technology</option>
+                  <option value="leadership">Effective Leadership in the Digital Age</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <button type="submit" class="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                  Register Now
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    <script>
+    function validateForm(event) {
+      let name = document.getElementById("name");
+      let email = document.getElementById("email");
+      let phone = document.getElementById("phone");
+      let topic = document.getElementById("topic");
+
+      let errorMessages = document.getElementsByClassName("error-message");
+      for (let i = 0; i < errorMessages.length; i++) {
+        errorMessages[i].remove();
+      }
+
+      let isValid = true;
+
+      if (name.value.trim() === "") {
+        let errorMessage = document.createElement("div");
+        errorMessage.classList.add("error-message", "text-red-500", "mt-2");
+        errorMessage.textContent = "Full Name is required.";
+        name.after(errorMessage);
+        isValid = false;
+      }
+
+      let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email.value)) {
+        let errorMessage = document.createElement("div");
+        errorMessage.classList.add("error-message", "text-red-500", "mt-2");
+        errorMessage.textContent = "Please enter a valid email address.";
+        email.after(errorMessage);
+        isValid = false;
+      }
+
+      if (phone.value.trim() === "") {
+        let errorMessage = document.createElement("div");
+        errorMessage.classList.add("error-message", "text-red-500", "mt-2");
+        errorMessage.textContent = "Phone number is required.";
+        phone.after(errorMessage);
+        isValid = false;
+      }
+      if (topic.value === "") {
+        let errorMessage = document.createElement("div");
+        errorMessage.classList.add("error-message", "text-red-500", "mt-2");
+        errorMessage.textContent = "Please select a seminar topic.";
+        topic.after(errorMessage);
+        isValid = false;
+      }
+      if (!isValid) {
+        event.preventDefault();
+      }
+    }
+    </script>
+</body>
+
+</html>
